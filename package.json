@@ -1,0 +1,29 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "To generate a team profile page",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullstackneo/team-profile-generator.git"
+  },
+  "keywords": [
+    "profile",
+    "generator"
+  ],
+  "author": "Neo Ji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fullstackneo/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/fullstackneo/team-profile-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
