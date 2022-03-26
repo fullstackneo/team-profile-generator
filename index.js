@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
-const generatePage = require('./src/template-html.js');
+const generateHTML = require('./src/template-html.js');
+const generateCSS = require('./src/template-css.js');
 const generateHTMLFile = require('./util/generateHTML');
 const generateCSSFile = require('./util/generateCSS');
+const teamData = {};
 
 const commonQuestions = [
   {
@@ -45,6 +47,26 @@ const commonQuestions = [
   },
 ];
 
+const addPosition = teamData => {
+  return inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'addPosition',
+        message: 'Add more staff?',
+        choices: ['engineer', 'intern', 'no'],
+      },
+    ])
+    .then(answer => {
+      if (answer.addPosition !== 'no') {
+        teamData.addPosition = answer.addPosition;
+        return promptStaff(teamData);
+      } else {
+        return teamData;
+      }
+    });
+};
+
 // ask for other members' info
 const promptStaff = teamData => {
   if (!teamData.engineer) {
@@ -56,12 +78,6 @@ const promptStaff = teamData => {
 
   return inquirer
     .prompt([
-      {
-        type: 'list',
-        name: 'position',
-        message: 'Add another staff:',
-        choices: ['engineer', 'intern'],
-      },
       ...commonQuestions,
       {
         type: 'input',
@@ -75,7 +91,7 @@ const promptStaff = teamData => {
             return false;
           }
         },
-        when: ({ position }) => position === 'engineer',
+        when: () => teamData.addPosition === 'engineer',
       },
       {
         type: 'input',
@@ -89,32 +105,19 @@ const promptStaff = teamData => {
             return false;
           }
         },
-        when: ({ position }) => position === 'intern',
-      },
-      {
-        type: 'list',
-        name: 'addMore',
-        message: `Add more staff?`,
-        choices: ['yes', 'no'],
+        when: () => teamData.addPosition === 'intern',
       },
     ])
     .then(memberData => {
-      const { position, addMore } = memberData;
-      delete memberData.position;
-      delete memberData.addMore;
-      teamData[position].push(memberData);
+      teamData[teamData.addPosition].push(memberData);
 
-      // console.log(teamData);
-      if (addMore === 'yes') {
-        promptStaff(teamData);
-      }
-    });
+      return teamData;
+    })
+    .then(addPosition);
 };
 
-// promptStaff({ manager: { name: '1', id: '2', email: '34', officeNumber: '5' } });
-
 // ask for manager's info
-const promptManager = () => {
+const getTeam = () => {
   return inquirer
     .prompt([
       {
@@ -145,15 +148,17 @@ const promptManager = () => {
         },
       },
     ])
-    // .then(managerData => {
-    //   teamData.manager = managerData;
-    //   return teamData;
-    // });
-};
-promptManager().then(promptStaff);
-//   .then(teamData => generatePage(teamData))
-//   .then(htmlContent => {
-//     generateHTMLFile(htmlContent);
-//   });
+    .then(staffData => {
+      teamData.manager = staffData;
 
-// generateCSSFile();
+      return teamData;
+    })
+    .then(addPosition);
+};
+
+getTeam()
+  .then(generateHTML)
+  .then(htmlContent => {
+    generateHTMLFile(htmlContent);
+    generateCSSFile(generateCSS);
+  });

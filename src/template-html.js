@@ -22,7 +22,7 @@ const generateProfile = obj => {
         <div class="contact">
           <ul>
             <li>ID: <span>${id}</span></li>
-            <li>Email: <a href="mail">${email}</a></li>
+            <li>Email: <a href="mailto:${email}">${email}</a></li>
             <li>${additionHTML}</li>
           </ul>
         </div>
@@ -30,6 +30,9 @@ const generateProfile = obj => {
 };
 
 const generateArray = arrayData => {
+  if (!arrayData) {
+    return ``;
+  }
   return arrayData.map(el => generateProfile(el)).join('');
 };
 
