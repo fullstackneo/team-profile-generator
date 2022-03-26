@@ -8,12 +8,12 @@ const commonQuestions = [
   {
     type: 'input',
     name: 'id',
-    message: `Staff's ID:`,
+    message: `Employee's ID:`,
     validate: idInput => {
       if (idInput) {
         return true;
       } else {
-        console.log("Please enter staff's id");
+        console.log("Please enter employee's id");
         return false;
       }
     },
@@ -21,12 +21,12 @@ const commonQuestions = [
   {
     type: 'input',
     name: 'email',
-    message: `Staff's Email:`,
+    message: `employee's Email:`,
     validate: emailInput => {
       if (emailInput) {
         return true;
       } else {
-        console.log("Please enter staff's email");
+        console.log("Please enter employee's email");
         return false;
       }
     },
