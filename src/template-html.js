@@ -18,7 +18,7 @@ const generateProfile = obj => {
         <div class="title">
           <h2>${name}</h2>
           <div>
-          <div><img src='../assets/icons/${position}.svg' alt='${position} icon' /></div>
+          <div><img src='./assets/icons/${position}.svg' alt='${position} icon' /></div>
           <p>${position}</p></div>
         </div>
         <div class="contact">
