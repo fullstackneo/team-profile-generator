@@ -5,7 +5,7 @@ const generateProfile = obj => {
   let position;
   if (rest.github) {
     position = 'Engineer';
-    additionHTML = `Github: <a href="https://github.com/${rest.github}/">${rest.github}</a>`;
+    additionHTML = `Github: <a href="https://github.com/${rest.github}/"  target="_blank">${rest.github}</a>`;
   } else if (rest.school) {
     position = 'Intern';
     additionHTML = `School: ${rest.school}`;

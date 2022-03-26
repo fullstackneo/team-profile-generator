@@ -3,22 +3,8 @@ const generateHTML = require('./src/template-html.js');
 const generateCSS = require('./src/template-css.js');
 const generateHTMLFile = require('./util/generateHTML');
 const generateCSSFile = require('./util/generateCSS');
-const teamData = {};
 
 const commonQuestions = [
-  {
-    type: 'input',
-    name: 'name',
-    message: `Staff's Name:`,
-    validate: nameInput => {
-      if (nameInput) {
-        return true;
-      } else {
-        console.log("Please enter staff's name");
-        return false;
-      }
-    },
-  },
   {
     type: 'input',
     name: 'id',
@@ -47,7 +33,7 @@ const commonQuestions = [
   },
 ];
 
-const addPosition = teamData => {
+const addMoreStaff = teamData => {
   return inquirer
     .prompt([
       {
@@ -62,6 +48,9 @@ const addPosition = teamData => {
         teamData.addPosition = answer.addPosition;
         return promptStaff(teamData);
       } else {
+        delete teamData.addPosition;
+        console.log(teamData);
+
         return teamData;
       }
     });
@@ -69,15 +58,26 @@ const addPosition = teamData => {
 
 // ask for other members' info
 const promptStaff = teamData => {
-  if (!teamData.engineer) {
-    teamData.engineer = [];
-  }
-  if (!teamData.intern) {
-    teamData.intern = [];
+  const { addPosition } = teamData;
+  if (!teamData[addPosition]) {
+    teamData[addPosition] = [];
   }
 
   return inquirer
     .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: `Staff's Name:`,
+        validate: nameInput => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter staff's name");
+            return false;
+          }
+        },
+      },
       ...commonQuestions,
       {
         type: 'input',
@@ -109,11 +109,10 @@ const promptStaff = teamData => {
       },
     ])
     .then(memberData => {
-      teamData[teamData.addPosition].push(memberData);
-
+      teamData[addPosition].push(memberData);
       return teamData;
     })
-    .then(addPosition);
+    .then(addMoreStaff);
 };
 
 // ask for manager's info
@@ -149,11 +148,11 @@ const getTeam = () => {
       },
     ])
     .then(staffData => {
+      const teamData = {};
       teamData.manager = staffData;
-
       return teamData;
     })
-    .then(addPosition);
+    .then(addMoreStaff);
 };
 
 getTeam()
