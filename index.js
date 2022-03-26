@@ -49,8 +49,6 @@ const addMoreStaff = teamData => {
         return promptStaff(teamData);
       } else {
         delete teamData.addPosition;
-        console.log(teamData);
-
         return teamData;
       }
     });
