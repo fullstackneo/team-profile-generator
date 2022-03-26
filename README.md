@@ -6,11 +6,11 @@ To generate member's information for your team
 
 ## Easy Step
 
-![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshots/screenshot1.jpg)
+![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshot/screenshot1.jpg)
 
 ## Demo Sample
 
-![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshots/screenshot2.jpg)
+![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshot/screenshot2.jpg)
 
 ## How-To Video
 
