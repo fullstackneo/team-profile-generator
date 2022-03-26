@@ -6,16 +6,15 @@ To generate member's information for your team
 
 ## Easy Step
 
-![image](https://github.com/fullstackneo/readme-generator/blob/main/assets/screenshots/screenshot.jpg)
+![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshots/screenshot1.jpg)
 
 ## Demo Sample
 
-![image](https://github.com/fullstackneo/readme-generator/blob/main/assets/screenshots/screenshot2.jpg)
-![image](https://github.com/fullstackneo/readme-generator/blob/main/assets/screenshots/screenshot3.jpg)
+![image](https://github.com/fullstackneo/team-profile-generator/blob/main/assets/screenshots/screenshot2.jpg)
 
 ## How-To Video
 
-https://drive.google.com/file/d/12DH--YV1bwFxQbQh2DetCTLTjHTXLawO/preview
+https://drive.google.com/file/d/1098406-jqRiw89deUi97lDOv_3c0GMYk/view
 
 ## Skills
 
