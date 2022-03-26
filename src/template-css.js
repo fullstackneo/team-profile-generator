@@ -32,7 +32,7 @@ section {
 }
 
 article {
-  flex: 0 0 30%;
+  flex: 0 0 250px;
   border-radius: 8px;
   margin: 10px;
   box-shadow: 4px 4px 4px #808080;

@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-const generateHTML = require('./util/generateHTML');
-const generateCSS = require('./util/generateCSS');
-const Manager = require('./lib/Manager');
-const teamData = {};
+const generatePage = require('./src/template-html.js');
+const generateHTMLFile = require('./util/generateHTML');
+const generateCSSFile = require('./util/generateCSS');
+
 const commonQuestions = [
   {
     type: 'input',
@@ -54,7 +54,7 @@ const promptStaff = teamData => {
     teamData.intern = [];
   }
 
-  inquirer
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -103,7 +103,8 @@ const promptStaff = teamData => {
       delete memberData.position;
       delete memberData.addMore;
       teamData[position].push(memberData);
-      console.log(teamData);
+
+      // console.log(teamData);
       if (addMore === 'yes') {
         promptStaff(teamData);
       }
@@ -114,7 +115,7 @@ const promptStaff = teamData => {
 
 // ask for manager's info
 const promptManager = () => {
-  inquirer
+  return inquirer
     .prompt([
       {
         type: 'input',
@@ -144,17 +145,15 @@ const promptManager = () => {
         },
       },
     ])
-    .then(managerData => {
-      teamData.manager = managerData;
-      return teamData;
-    })
-    // .then(data => {
-    //   const { name, id, email, officeNumber } = data;
-    //   const manager = new Manager(name, id, email, officeNumber);
-    //   console.log(manager);
+    // .then(managerData => {
+    //   teamData.manager = managerData;
+    //   return teamData;
     // });
-    .then(promptStaff);
 };
+promptManager().then(promptStaff);
+//   .then(teamData => generatePage(teamData))
+//   .then(htmlContent => {
+//     generateHTMLFile(htmlContent);
+//   });
 
-generateHTML();
-generateCSS();
+// generateCSSFile();

@@ -1,4 +1,40 @@
-module.exports = `<!DOCTYPE html>
+const generateProfile = obj => {
+  const { name, id, email, ...rest } = obj;
+
+  let additionHTML = ``;
+  let position;
+  if (rest.github) {
+    position = 'Engineer';
+    additionHTML = `Github: <a href="https://github.com/${rest.github}/">${rest.github}</a>`;
+  } else if (rest.school) {
+    position = 'Intern';
+    additionHTML = `School: ${rest.school}`;
+  } else if (rest.officeNumber) {
+    position = 'Manager';
+    additionHTML = `Office Number: ${rest.officeNumber}`;
+  }
+
+  return `<article>
+        <div class="title">
+          <h2>${name}</h2>
+          <p>${position}</p>
+        </div>
+        <div class="contact">
+          <ul>
+            <li>ID: <span>${id}</span></li>
+            <li>Email: <a href="mail">${email}</a></li>
+            <li>${additionHTML}</li>
+          </ul>
+        </div>
+      </article>`;
+};
+
+const generateArray = arrayData => {
+  return arrayData.map(el => generateProfile(el)).join('');
+};
+
+module.exports = templateData => {
+  return `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -12,72 +48,11 @@ module.exports = `<!DOCTYPE html>
       <h1>My Team</h1>
     </header>
     <section>
-      <article>
-        <div class="title">
-          <h2>Name</h2>
-          <p>Title</p>
-        </div>
-        <div class="contact">
-          <ul>
-            <li>ID: <span>1234124</span></li>
-            <li>Email: <a href="mail">123@gmail.com</a></li>
-            <li>Github: <a href="tel">123241241</a></li>
-          </ul>
-        </div>
-      </article>
-      <article>
-        <div class="title">
-          <h2>Name</h2>
-          <p>Title</p>
-        </div>
-        <div class="contact">
-          <ul>
-            <li>ID</li>
-            <li>Email</li>
-            <li>Office Number</li>
-          </ul>
-        </div>
-      </article>
-      <article>
-        <div class="title">
-          <h2>Name</h2>
-          <p>Title</p>
-        </div>
-        <div class="contact">
-          <ul>
-            <li>ID</li>
-            <li>Email</li>
-            <li>Office Number</li>
-          </ul>
-        </div>
-      </article>
-      <article>
-        <div class="title">
-          <h2>Name</h2>
-          <p>Title</p>
-        </div>
-        <div class="contact">
-          <ul>
-            <li>ID</li>
-            <li>Email</li>
-            <li>Office Number</li>
-          </ul>
-        </div>
-      </article>
-      <article>
-        <div class="title">
-          <h2>Name</h2>
-          <p>Title</p>
-        </div>
-        <div class="contact">
-          <ul>
-            <li>ID</li>
-            <li>Email</li>
-            <li>Office Number</li>
-          </ul>
-        </div>
-      </article>
+      ${generateProfile(templateData.manager)}
+      ${generateArray(templateData.engineer)}
+      ${generateArray(templateData.intern)}
     </section>
   </body>
 </html>
 `;
+};
