@@ -11,13 +11,15 @@ const generateProfile = obj => {
     additionHTML = `School: ${rest.school}`;
   } else if (rest.officeNumber) {
     position = 'Manager';
-    additionHTML = `Office Number: ${rest.officeNumber}`;
+    additionHTML = `Office number: ${rest.officeNumber}`;
   }
 
   return `<article>
         <div class="title">
           <h2>${name}</h2>
-          <p>${position}</p>
+          <div>
+          <div><img src='../assets/icons/${position}.svg' alt='${position} icon' /></div>
+          <p>${position}</p></div>
         </div>
         <div class="contact">
           <ul>

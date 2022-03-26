@@ -46,19 +46,34 @@ article {
 }
 
 .title h2 {
-  font-size: 18px;
-  margin-bottom: 5px;
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+
+.title img {
+  width: 25px;
+}
+
+.title > div {
+  display: flex;
+  align-items: center;
+}
+
+.title>div{
+  display
 }
 
 .title p {
+  margin-left: 5px;
   font-size: 15px;
 }
 
 .contact {
-  font-size: 10px;
+  font-size: 12px;
   background-color: rgb(246, 246, 248);
   border-radius: 0 0 4px 4px;
-  padding: 15px;
+  padding: 20px 15px;
 }
 
 .contact ul {
