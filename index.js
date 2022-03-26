@@ -1,6 +1,49 @@
 const inquirer = require('inquirer');
+const generateHTML = require('./util/generateHTML');
+const generateCSS = require('./util/generateCSS');
 const Manager = require('./lib/Manager');
 const teamData = {};
+const commonQuestions = [
+  {
+    type: 'input',
+    name: 'name',
+    message: `Staff's Name:`,
+    validate: nameInput => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter staff's name");
+        return false;
+      }
+    },
+  },
+  {
+    type: 'input',
+    name: 'id',
+    message: `Staff's ID:`,
+    validate: idInput => {
+      if (idInput) {
+        return true;
+      } else {
+        console.log("Please enter staff's id");
+        return false;
+      }
+    },
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: `Staff's Email:`,
+    validate: emailInput => {
+      if (emailInput) {
+        return true;
+      } else {
+        console.log("Please enter staff's email");
+        return false;
+      }
+    },
+  },
+];
 
 // ask for other members' info
 const promptStaff = teamData => {
@@ -19,45 +62,7 @@ const promptStaff = teamData => {
         message: 'Add another staff:',
         choices: ['engineer', 'intern'],
       },
-      {
-        type: 'input',
-        name: 'name',
-        message: `Staff's Name:`,
-        validate: nameInput => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log("Please enter staff's name");
-            return false;
-          }
-        },
-      },
-      {
-        type: 'input',
-        name: 'id',
-        message: `Staff's ID:`,
-        validate: idInput => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter staff's id");
-            return false;
-          }
-        },
-      },
-      {
-        type: 'input',
-        name: 'email',
-        message: `Staff's Email:`,
-        validate: emailInput => {
-          if (emailInput) {
-            return true;
-          } else {
-            console.log("Please enter staff's email");
-            return false;
-          }
-        },
-      },
+      ...commonQuestions,
       {
         type: 'input',
         name: 'github',
@@ -105,7 +110,7 @@ const promptStaff = teamData => {
     });
 };
 
-promptStaff({ manager: { name: '1', id: '2', email: '34', officeNumber: '5' } });
+// promptStaff({ manager: { name: '1', id: '2', email: '34', officeNumber: '5' } });
 
 // ask for manager's info
 const promptManager = () => {
@@ -124,32 +129,7 @@ const promptManager = () => {
           }
         },
       },
-      {
-        type: 'input',
-        name: 'id',
-        message: `Manager's ID:`,
-        validate: idInput => {
-          if (idInput) {
-            return true;
-          } else {
-            console.log("Please enter manager's id");
-            return false;
-          }
-        },
-      },
-      {
-        type: 'input',
-        name: 'email',
-        message: `Manager's Email:`,
-        validate: emailInput => {
-          if (emailInput) {
-            return true;
-          } else {
-            console.log("Please enter manager's email");
-            return false;
-          }
-        },
-      },
+      ...commonQuestions,
       {
         type: 'input',
         name: 'officeNumber',
@@ -176,4 +156,5 @@ const promptManager = () => {
     .then(promptStaff);
 };
 
-// promptManager();
+generateHTML();
+generateCSS();
